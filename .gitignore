@@ -1,1 +1,9 @@
+.envrc
+coverage
+coverage.json
 node_modules
+typechain
+
+#Hardhat files
+cache
+artifacts
