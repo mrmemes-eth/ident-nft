@@ -1,0 +1,14 @@
+{
+  "name": "ident-nft",
+  "version": "1.0.0",
+  "description": "Login via NFT",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "hardhat": "^2.7.0"
+  }
+}
