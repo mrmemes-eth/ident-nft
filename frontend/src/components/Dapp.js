@@ -122,16 +122,8 @@ export class Dapp extends React.Component {
             </div>
           </div>
         </header>
-        <div className="max-w-screen-md bg-white rounded-3xl w-11/12 mt-16 md:mt-0 md:p-6 pb-12 py-12 space-y-8">
+        <div className="max-w-screen-md bg-gray-100 rounded-3xl w-11/12 mt-16 md:mt-0 md:p-6 pb-12 py-12 space-y-8">
           <div className="text-3xl text-left tracking-wide leading-relaxed p-2">
-            <p>NFTPass collection size: {this.state.supply.toString()}</p>
-          </div>
-        </div>
-
-        <hr />
-
-        <div className="row">
-          <div className="col-12">
             {this.state.supply.eq(0) && (
               <MintNFTPass
                 mintNFTPass={() => this._mintPass(this.state.selectedAddress)}
@@ -139,6 +131,14 @@ export class Dapp extends React.Component {
             )}
 
             {this.state.supply.gt(0) && <NFTPass />}
+          </div>
+        </div>
+
+        <hr />
+
+        <div className="row">
+          <div className="col-12">
+
           </div>
         </div>
         <div className="row">

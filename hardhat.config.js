@@ -10,6 +10,7 @@ require("./tasks/faucet");
  */
 
 const HARMONY_PRIVATE_KEY = process.env["HARMONY_PRIVATE_KEY"];
+const HARDHAT_NETWORK_ID = process.env["HARDHAT_NETWORK_ID"];
 
 module.exports = {
   solidity: "0.8.0",
