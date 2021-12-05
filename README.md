@@ -2,7 +2,31 @@
 
 Hopefully everyone.
 
-## Commands
+## Running the Dapp
+
+In one shell (for first run and then after every contract change):
+
+```shell
+npx hardhat compile
+npx hardhat node
+```
+
+In a second shell:
+
+```shell
+cd frontend
+npm start
+```
+
+In a third shell:
+
+```shell
+npx hardhat run scripts/deploy.js --network localhost
+```
+
+For most actions you'll need to tap the local faucet. Instructions in-browser.
+
+## Useful Commands
 
 You can discover all commands by typing `npx hardhat` and exploring the options, but a few that will be used frequently follow.
 
