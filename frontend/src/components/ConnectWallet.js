@@ -26,7 +26,7 @@ export function ConnectWallet({ connectWallet, networkError, dismiss }) {
             Hello Fren, <br /> do you have <br />what it takes <br />to pass through?
           </p>
           <button
-            className="mx-auto w-full bg-white shadow-sm hover:text-red-600 font-semibold text-gray-500 rounded-3xl border-2 border-gray-300 p-3 flex"
+            className="mx-auto w-full bg-white shadow-xl hover:shadow-md hover:text-red-600 font-semibold text-gray-500 rounded-3xl border-1 border-gray-300 p-3 flex"
             type="button"
             onClick={connectWallet}
           >
