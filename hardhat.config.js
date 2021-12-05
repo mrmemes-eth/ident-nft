@@ -1,5 +1,8 @@
+require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-waffle");
+require("@openzeppelin/hardhat-upgrades");
 require("process");
+
 require("./tasks/faucet");
 
 /**
@@ -9,7 +12,7 @@ require("./tasks/faucet");
 const HARMONY_PRIVATE_KEY = process.env["HARMONY_PRIVATE_KEY"];
 
 module.exports = {
-  solidity: "0.7.3",
+  solidity: "0.8.0",
   networks: {
     testnet: {
       url: `https://api.s0.b.hmny.io`,

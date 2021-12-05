@@ -1,5 +1,6 @@
 .envrc
 node_modules
+/frontend/src/contracts
 
 #Hardhat files
 cache

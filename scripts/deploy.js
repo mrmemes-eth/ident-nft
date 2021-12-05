@@ -1,4 +1,7 @@
 // This is a script for deploying your contracts. You can adapt it to deploy
+
+const { ethers } = require("hardhat");
+
 // yours, or create new ones.
 async function main() {
   // This is just a convenience check
@@ -27,6 +30,14 @@ async function main() {
 
   // We also save the contract's artifacts and address in the frontend directory
   saveFrontendFiles(token);
+
+  const NFTPass = await ethers.getContractFactory("NFTPass");
+  const nftPass = await NFTPass.deploy();
+  await nftPass.deployed();
+
+  console.log("NFTPass contract deployed to address:", nftPass.address);
+
+  saveFrontendFiles(nftPass);
 }
 
 function saveFrontendFiles(token) {
