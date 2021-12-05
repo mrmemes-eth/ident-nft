@@ -104,7 +104,7 @@ export class Dapp extends React.Component {
       <div className="min-h-screen h-full relative flex flex-col items-center md:justify-center bg-gray-100">
         <header class="w-full absolute top-0 h-14">
           <div class="flex top-0 items-center justify-between pr-4 pl-4 h-16">
-            <div class="flex font-bold">NFT Authentication Framework MVP</div>
+            <div class="flex font-bold text-gray-600">NFT Authentication Framework MVP</div>
             <div class="p-2 border-2 border-gray-200 rounded-xl text-xs text-right text-gray-500 flex items-center">
               <div class="rounded-3xl w-8 h-8 bg-gradient-to-br from-blue-900 to-pink-700 mr-2"></div>
               <div class="flex flex-col">
