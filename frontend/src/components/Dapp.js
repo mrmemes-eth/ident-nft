@@ -6,6 +6,7 @@ import { ethers } from "ethers";
 // We import the contract's artifacts and address here, as we are going to be
 // using them with ethers
 import TokenArtifact from "../contracts/Token.json";
+import NFTPassArtifact from "../contracts/NFTPass.json";
 import contractAddress from "../contracts/contract-address.json";
 
 // All the logic of this dapp is contained in the Dapp component.
@@ -18,6 +19,7 @@ import { Transfer } from "./Transfer";
 import { TransactionErrorMessage } from "./TransactionErrorMessage";
 import { WaitingForTransactionMessage } from "./WaitingForTransactionMessage";
 import { NoTokensMessage } from "./NoTokensMessage";
+import { MintNFTPass } from "./MintNFTPass";
 
 // This is the Hardhat Network id, you might change it in the hardhat.config.js
 // Here's a list of network ids https://docs.metamask.io/guide/ethereum-provider.html#properties
@@ -46,9 +48,12 @@ export class Dapp extends React.Component {
     this.initialState = {
       // The info of the token (i.e. It's Name and symbol)
       tokenData: undefined,
+      // The info of the NFTPass
+      nftPassData: undefined,
       // The user's address and balance
       selectedAddress: undefined,
       balance: undefined,
+      supply: undefined,
       // The ID about transactions being sent, and any possible error with them
       txBeingSent: undefined,
       transactionError: undefined,
@@ -84,7 +89,12 @@ export class Dapp extends React.Component {
 
     // If the token data or the user's balance hasn't loaded yet, we show
     // a loading component.
-    if (!this.state.tokenData || !this.state.balance) {
+    if (
+      !this.state.tokenData ||
+      !this.state.nftPassData ||
+      !this.state.balance ||
+      !this.state.supply
+    ) {
       return <Loading />;
     }
 
@@ -103,6 +113,7 @@ export class Dapp extends React.Component {
               </b>
               .
             </p>
+            <p>NFTPass collection size: {this.state.supply.toString()}</p>
           </div>
         </div>
 
@@ -220,6 +231,7 @@ export class Dapp extends React.Component {
     // sample project, but you can reuse the same initialization pattern.
     this._intializeEthers();
     this._getTokenData();
+    this._getNFTPassData();
     this._startPollingData();
   }
 
@@ -227,11 +239,17 @@ export class Dapp extends React.Component {
     // We first initialize ethers by creating a provider using window.ethereum
     this._provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    // When, we initialize the contract using that provider and the token's
+    // Then, we initialize the contract using that provider and the token's
     // artifact. You can do this same thing with your contracts.
     this._token = new ethers.Contract(
       contractAddress.Token,
       TokenArtifact.abi,
+      this._provider.getSigner(0)
+    );
+
+    this._nftPass = new ethers.Contract(
+      contractAddress.NFTPass,
+      NFTPassArtifact.abi,
       this._provider.getSigner(0)
     );
   }
@@ -245,9 +263,11 @@ export class Dapp extends React.Component {
   // initialize the app, as we do with the token data.
   _startPollingData() {
     this._pollDataInterval = setInterval(() => this._updateBalance(), 1000);
+    this._pollDataInterval = setInterval(() => this._updateSupply(), 1000);
 
     // We run it once immediately so we don't have to wait for it
     this._updateBalance();
+    this._updateSupply();
   }
 
   _stopPollingData() {
@@ -267,6 +287,18 @@ export class Dapp extends React.Component {
   async _updateBalance() {
     const balance = await this._token.balanceOf(this.state.selectedAddress);
     this.setState({ balance });
+  }
+
+  async _getNFTPassData() {
+    const name = await this._nftPass.name();
+    const symbol = await this._nftPass.symbol();
+
+    this.setState({ nftPassData: { name, symbol } });
+  }
+
+  async _updateSupply() {
+    const supply = await this._nftPass.totalSupply();
+    this.setState({ supply });
   }
 
   // This method sends an ethereum transaction to transfer tokens.
