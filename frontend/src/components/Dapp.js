@@ -108,7 +108,7 @@ export class Dapp extends React.Component {
             <div class="p-2 border-1 shadow-md border-gray-200 rounded-xl text-right text-gray-500 bg-white flex items-center">
               <div class="rounded-3xl w-8 h-8 bg-gradient-to-br from-blue-900 to-pink-700 mr-2"></div>
               <div class="flex flex-col">
-                <div class="w-full text-md text-left">{this.state.selectedAddress.substring(0, 5)}(...)</div>
+                <div class="w-full text-md font-bold text-left">{this.state.selectedAddress.substring(0, 5)}(...)</div>
                 <div class="w-full text-xs text-left">You have: {this.state.balance.toString()} {this.state.tokenData.symbol}
                 </div>
               </div>
