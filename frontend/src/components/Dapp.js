@@ -134,6 +134,15 @@ export class Dapp extends React.Component {
 
         <div className="row">
           <div className="col-12">
+            {this.state.supply.eq(0) && (
+              <MintNFTPass
+                mintNFTPass={() => this._mintPass(this.state.selectedAddress)}
+              />
+            )}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
             {/* 
               Sending a transaction isn't an immidiate action. You have to wait
               for it to be mined.
@@ -370,6 +379,36 @@ export class Dapp extends React.Component {
     } finally {
       // If we leave the try/catch, we aren't sending a tx anymore, so we clear
       // this part of the state.
+      this.setState({ txBeingSent: undefined });
+    }
+  }
+
+  async _mintPass(to) {
+    try {
+      const tx = await this._nftPass.mintNFTPass();
+      this.setState({ txBeingSent: tx.hash });
+      const receipt = await tx.wait();
+
+      if (receipt.status === 0) {
+        throw new Error("Minting NFTPass failed");
+      }
+
+      await this._updateSupply();
+
+      const sendTxn = await this._nftPass.send(to, this.state.supply);
+      this.setState({ txBeingSent: sendTxn.hash });
+      const sendReceipt = await sendTxn.wait();
+
+      if (sendReceipt.status === 0) {
+        throw new Error("Sending NFTPass failed");
+      }
+    } catch (error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      console.error(error);
+      this.setState({ transactionError: error });
+    } finally {
       this.setState({ txBeingSent: undefined });
     }
   }
