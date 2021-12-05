@@ -40,11 +40,17 @@ async function main() {
   console.log("NFTPass contract deployed to address:", NFTPass.address);
 
   // Mint an NFTPass to the HARMONY_OWNER_WALLET
-  const txn = await NFTPass.mintNFTPass(process.env["HARMONY_OWNER_WALLET"]);
-  await txn.wait();
+  // const ownerWallet = process.env["HARMONY_OWNER_WALLET"];
+  // const txn = await NFTPass.mintNFTPass();
+  // await txn.wait();
 
-  const supply = await NFTPass.totalSupply();
-  console.log("Total Supply after initial mint: %s", supply);
+  // const supply = await NFTPass.totalSupply();
+  // console.log("Total Supply after initial mint: %s", supply);
+
+  // const sndTxn = await NFTPass.send(ownerWallet, supply);
+  // await sndTxn.wait();
+
+  // console.log("NFT[%s] sent to: %s", supply, ownerWallet);
 
   saveFrontendFiles("NFTPass", NFTPass);
 }

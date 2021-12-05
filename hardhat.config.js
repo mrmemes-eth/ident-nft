@@ -14,6 +14,9 @@ const HARMONY_PRIVATE_KEY = process.env["HARMONY_PRIVATE_KEY"];
 module.exports = {
   solidity: "0.8.0",
   networks: {
+    hardhat: {
+      chainId: 1337,
+    },
     testnet: {
       url: `https://api.s0.b.hmny.io`,
       accounts: [`0x${HARMONY_PRIVATE_KEY}`],

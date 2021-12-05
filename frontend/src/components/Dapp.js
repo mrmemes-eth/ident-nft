@@ -123,9 +123,8 @@ export class Dapp extends React.Component {
         </header>
         <div className="max-w-screen-md bg-white rounded-3xl w-11/12 mt-16 md:mt-0 md:p-6 pb-12 py-12 space-y-8">
           <div className="text-3xl text-left tracking-wide leading-relaxed p-2">
-            {this.state.tokenData.name} ({this.state.tokenData.symbol})
             <p>
-
+              {this.state.tokenData.name} ({this.state.tokenData.symbol})
             </p>
             <p>NFTPass collection size: {this.state.supply.toString()}</p>
           </div>
