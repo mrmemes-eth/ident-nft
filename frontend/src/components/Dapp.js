@@ -102,14 +102,20 @@ export class Dapp extends React.Component {
     // If everything is loaded, we render the application.
     return (
       <div className="min-h-screen h-full relative flex flex-col items-center md:justify-center bg-gray-100">
-        <header class="w-full absolute top-0 h-14">
-          <div class="flex top-0 items-center justify-between pr-4 pl-4 h-16">
-            <div class="flex font-bold text-gray-600">NFT Authentication Framework MVP</div>
-            <div class="p-2 border-1 shadow-md border-gray-200 rounded-xl text-right text-gray-500 bg-white flex items-center">
-              <div class="rounded-3xl w-8 h-8 bg-gradient-to-br from-blue-900 to-pink-700 mr-2"></div>
-              <div class="flex flex-col">
-                <div class="w-full text-md text-left">{this.state.selectedAddress.substring(0, 5)}(...)</div>
-                <div class="w-full text-xs text-left">You have: {this.state.balance.toString()} {this.state.tokenData.symbol}
+        <header className="w-full absolute top-0 h-14">
+          <div className="flex top-0 items-center justify-between pr-4 pl-4 h-16">
+            <div className="flex font-bold text-gray-600">
+              NFT Authentication Framework MVP
+            </div>
+            <div className="p-2 border-1 shadow-md border-gray-200 rounded-xl text-right text-gray-500 bg-white flex items-center">
+              <div className="rounded-3xl w-8 h-8 bg-gradient-to-br from-blue-900 to-pink-700 mr-2"></div>
+              <div className="flex flex-col">
+                <div className="w-full text-md text-left">
+                  {this.state.selectedAddress.substring(0, 5)}(...)
+                </div>
+                <div className="w-full text-xs text-left">
+                  You have: {this.state.balance.toString()}{" "}
+                  {this.state.tokenData.symbol}
                 </div>
               </div>
             </div>
