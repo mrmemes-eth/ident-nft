@@ -16,18 +16,12 @@ contract NFTPass is Ownable, ERC721Enumerable {
     console.log("NFTPass contract.");
   }
 
-  function mintNFTPass(address recipient)
-    public onlyOwner
-    returns (uint256)
-  {
-
-    console.log("Mintint NFT to Recipient", recipient);
-
+  function mintNFTPass(address recipient) public onlyOwner returns (uint256) {
     _tokenIds.increment();
-
     uint256 newItemId = _tokenIds.current();
     _safeMint(recipient, newItemId);
 
+    console.log("Minting NFTPass[%s] to Recipient: %s", newItemId, recipient);
     return newItemId;
   }
 }

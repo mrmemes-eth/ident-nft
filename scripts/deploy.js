@@ -1,6 +1,7 @@
 // This is a script for deploying your contracts. You can adapt it to deploy
 
 const { ethers, artifacts } = require("hardhat");
+const process = require("process");
 
 // yours, or create new ones.
 async function main() {
@@ -31,13 +32,21 @@ async function main() {
   // We also save the contract's artifacts and address in the frontend directory
   saveFrontendFiles("Token", token);
 
-  const NFTPass = await ethers.getContractFactory("NFTPass");
-  const nftPass = await NFTPass.deploy();
-  await nftPass.deployed();
+  const NFTPassFactory = await ethers.getContractFactory("NFTPass");
+  const NFTPass = await NFTPassFactory.deploy();
+  [owner, addr1, ...addrs] = await ethers.getSigners();
+  await NFTPass.deployed();
 
-  console.log("NFTPass contract deployed to address:", nftPass.address);
+  console.log("NFTPass contract deployed to address:", NFTPass.address);
 
-  saveFrontendFiles("NFTPass", nftPass);
+  // Mint an NFTPass to the HARMONY_OWNER_WALLET
+  const txn = await NFTPass.mintNFTPass(process.env["HARMONY_OWNER_WALLET"]);
+  await txn.wait();
+
+  const supply = await NFTPass.totalSupply();
+  console.log("Total Supply after initial mint: %s", supply);
+
+  saveFrontendFiles("NFTPass", NFTPass);
 }
 
 function saveFrontendFiles(name, token) {
