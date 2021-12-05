@@ -100,18 +100,25 @@ export class Dapp extends React.Component {
 
     // If everything is loaded, we render the application.
     return (
-      <div className="container p-4">
-        <div className="row">
-          <div className="col-12">
-            <h1>
-              {this.state.tokenData.name} ({this.state.tokenData.symbol})
-            </h1>
+      <div className="min-h-screen h-full relative flex flex-col items-center md:justify-center">
+        <header class="w-full absolute top-0 h-14">
+          <div class="flex top-0 items-center justify-between pr-4 pl-4 h-16">
+            <div class="flex font-bold">NFT Authentication Framework MVP</div>
+            <div class="p-2 border-2 border-gray-200 rounded-xl text-xs text-right text-gray-500 flex items-center">
+              <div class="rounded-3xl w-8 h-8 bg-gradient-to-br from-blue-900 to-pink-700 mr-2"></div>
+              <div class="flex flex-col">
+                <div class="w-full text-left">{this.state.selectedAddress}</div>
+                <div class="w-full text-left">You have: {this.state.balance.toString()} {this.state.tokenData.symbol}
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="max-w-screen-md bg-white rounded-3xl w-11/12 mt-16 md:mt-0 md:p-6 pb-12 py-12 space-y-8">
+          <div className="text-3xl text-left tracking-wide leading-relaxed p-2">
+            {this.state.tokenData.name} ({this.state.tokenData.symbol})
             <p>
-              Welcome <b>{this.state.selectedAddress}</b>, you have{" "}
-              <b>
-                {this.state.balance.toString()} {this.state.tokenData.symbol}
-              </b>
-              .
+
             </p>
             <p>NFTPass collection size: {this.state.supply.toString()}</p>
           </div>
