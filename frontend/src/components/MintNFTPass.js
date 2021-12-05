@@ -3,7 +3,7 @@ import React from "react";
 export function MintNFTPass({ mintNFTPass }) {
   return (
     <div>
-    <div class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-900 to-red-600 text-left tracking-wide leading-tight pl-3">
+    <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-900 to-red-600 text-left tracking-wide leading-tight pl-3">
       You don't have <br/> a NFT pass yet. <br/> Please mint <br/> to access our service.</div>
       <form
         onSubmit={(event) => {
