@@ -4,7 +4,7 @@ import { NetworkErrorMessage } from "./NetworkErrorMessage";
 
 export function ConnectWallet({ connectWallet, networkError, dismiss }) {
   return (
-    <div class="min-h-screen h-full relative flex flex-col items-center md:justify-center">
+    <div class="min-h-screen h-full relative flex flex-col items-center md:justify-center bg-gray-100">
       <header class="w-full absolute top-0 h-14">
         <div class="flex top-0 items-center justify-between pr-4 pl-4 h-12">
           <div class="flex font-bold">NFT Authentication Framework MVP</div>
@@ -21,8 +21,8 @@ export function ConnectWallet({ connectWallet, networkError, dismiss }) {
             />
           )}
         </div>
-        <div class="max-w-screen-md bg-white rounded-3xl w-11/12 mt-16 md:mt-0 md:p-6 pb-12 py-12 space-y-8">
-          <p class="text-3xl text-left tracking-wide leading-relaxed p-2">Hello Fren, <br /> do you have what it takes to pass through?</p>
+        <div class="max-w-screen-md rounded-3xl w-11/12 mt-16 md:mt-0 md:p-6 pb-12 py-12 space-y-8 ">
+          <p class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-900 to-red-600 text-left tracking-wide leading-tight p-2">Hello Fren, <br /> do you have <br/>what it takes <br/>to pass through?</p>
           <button
             className="mx-auto w-full bg-white shadow-sm hover:shadow-xl font-semibold text-gray-500 rounded-3xl border-2 border-gray-300 p-3 flex"
             type="button"

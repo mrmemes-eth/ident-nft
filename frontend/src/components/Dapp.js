@@ -39,6 +39,7 @@ const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 // Note that (3) and (4) are specific of this sample application, but they show
 // you how to keep your Dapp and contract's state in sync,  and how to send a
 // transaction.
+
 export class Dapp extends React.Component {
   constructor(props) {
     super(props);
@@ -100,7 +101,7 @@ export class Dapp extends React.Component {
 
     // If everything is loaded, we render the application.
     return (
-      <div className="min-h-screen h-full relative flex flex-col items-center md:justify-center">
+      <div className="min-h-screen h-full relative flex flex-col items-center md:justify-center bg-gray-100">
         <header class="w-full absolute top-0 h-14">
           <div class="flex top-0 items-center justify-between pr-4 pl-4 h-16">
             <div class="flex font-bold">NFT Authentication Framework MVP</div>
