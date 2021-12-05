@@ -1,6 +1,6 @@
 // This is a script for deploying your contracts. You can adapt it to deploy
 
-const { ethers } = require("hardhat");
+const { ethers, artifacts } = require("hardhat");
 
 // yours, or create new ones.
 async function main() {
@@ -29,7 +29,7 @@ async function main() {
   console.log("Token address:", token.address);
 
   // We also save the contract's artifacts and address in the frontend directory
-  saveFrontendFiles(token);
+  saveFrontendFiles("Token", token);
 
   const NFTPass = await ethers.getContractFactory("NFTPass");
   const nftPass = await NFTPass.deploy();
@@ -37,26 +37,31 @@ async function main() {
 
   console.log("NFTPass contract deployed to address:", nftPass.address);
 
-  saveFrontendFiles(nftPass);
+  saveFrontendFiles("NFTPass", nftPass);
 }
 
-function saveFrontendFiles(token) {
+function saveFrontendFiles(name, token) {
   const fs = require("fs");
   const contractsDir = __dirname + "/../frontend/src/contracts";
+  const contractsFile = contractsDir + "/contract-address.json";
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
   }
 
-  fs.writeFileSync(
-    contractsDir + "/contract-address.json",
-    JSON.stringify({ Token: token.address }, undefined, 2)
-  );
+  if (!fs.existsSync(contractsFile)) {
+    fs.writeFileSync(contractsFile, "{}");
+  }
 
-  const TokenArtifact = artifacts.readArtifactSync("Token");
+  const contractsData = JSON.parse(fs.readFileSync(contractsFile));
+  contractsData[name] = token.address;
+
+  fs.writeFileSync(contractsFile, JSON.stringify(contractsData, undefined, 2));
+
+  const TokenArtifact = artifacts.readArtifactSync(name);
 
   fs.writeFileSync(
-    contractsDir + "/Token.json",
+    contractsDir + "/" + name + ".json",
     JSON.stringify(TokenArtifact, null, 2)
   );
 }
